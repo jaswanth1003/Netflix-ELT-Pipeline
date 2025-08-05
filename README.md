@@ -69,6 +69,7 @@ Upload all CSVs into the root folder of the bucket.
 
 ### 3. Set Up Snowflake Roles, User, Warehouse, Schema, Stage, and Raw Tables
 
+```sql
 -- Switch to admin role
 USE ROLE ACCOUNTADMIN;
 
