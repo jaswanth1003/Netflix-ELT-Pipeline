@@ -69,6 +69,7 @@ Upload all CSVs into the root folder of the bucket.
 
 ### 3. Set Up Snowflake Roles, User, Warehouse, Schema, Stage, and Raw Tables
 
+-- Switch to admin role
 USE ROLE ACCOUNTADMIN;
 
 -- Create role and assign to ACCOUNTADMIN
@@ -105,32 +106,67 @@ GRANT ALL ON FUTURE TABLES IN SCHEMA MOVIELENS.RAW TO ROLE TRANSFORM;
 
 -- Create stage to connect to S3
 CREATE STAGE netflixstage
-URL='s3://netflixdataset-srujan'
-CREDENTIALS=(AWS_KEY_ID='your_aws_key' AWS_SECRET_KEY='your_secret_key');
+  URL='s3://netflixdataset-srujan'
+  CREDENTIALS=(
+    AWS_KEY_ID='your_aws_key'
+    AWS_SECRET_KEY='your_secret_key'
+  );
 
 -- Create raw tables and load data
-CREATE OR REPLACE TABLE raw_movies (movieId INTEGER, title STRING, genres STRING);
-COPY INTO raw_movies FROM '@netflixstage/movies.csv'
+CREATE OR REPLACE TABLE raw_movies (
+  movieId INTEGER,
+  title STRING,
+  genres STRING
+);
+COPY INTO raw_movies
+FROM '@netflixstage/movies.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
-CREATE OR REPLACE TABLE raw_ratings (userId INTEGER, movieId INTEGER, rating FLOAT, timestamp BIGINT);
-COPY INTO raw_ratings FROM '@netflixstage/ratings.csv'
+CREATE OR REPLACE TABLE raw_ratings (
+  userId INTEGER,
+  movieId INTEGER,
+  rating FLOAT,
+  timestamp BIGINT
+);
+COPY INTO raw_ratings
+FROM '@netflixstage/ratings.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
-CREATE OR REPLACE TABLE raw_tags (userId INTEGER, movieId INTEGER, tag STRING, timestamp BIGINT);
-COPY INTO raw_tags FROM '@netflixstage/tags.csv'
-FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"') ON_ERROR = 'CONTINUE';
+CREATE OR REPLACE TABLE raw_tags (
+  userId INTEGER,
+  movieId INTEGER,
+  tag STRING,
+  timestamp BIGINT
+);
+COPY INTO raw_tags
+FROM '@netflixstage/tags.csv'
+FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"')
+ON_ERROR = 'CONTINUE';
 
-CREATE OR REPLACE TABLE raw_genome_scores (movieId INTEGER, tagId INTEGER, relevance FLOAT);
-COPY INTO raw_genome_scores FROM '@netflixstage/genome-scores.csv'
+CREATE OR REPLACE TABLE raw_genome_scores (
+  movieId INTEGER,
+  tagId INTEGER,
+  relevance FLOAT
+);
+COPY INTO raw_genome_scores
+FROM '@netflixstage/genome-scores.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
-CREATE OR REPLACE TABLE raw_genome_tags (tagId INTEGER, tag STRING);
-COPY INTO raw_genome_tags FROM '@netflixstage/genome-tags.csv'
+CREATE OR REPLACE TABLE raw_genome_tags (
+  tagId INTEGER,
+  tag STRING
+);
+COPY INTO raw_genome_tags
+FROM '@netflixstage/genome-tags.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
-CREATE OR REPLACE TABLE raw_links (movieId INTEGER, imdbId INTEGER, tmdbId INTEGER);
-COPY INTO raw_links FROM '@netflixstage/links.csv'
+CREATE OR REPLACE TABLE raw_links (
+  movieId INTEGER,
+  imdbId INTEGER,
+  tmdbId INTEGER
+);
+COPY INTO raw_links
+FROM '@netflixstage/links.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
 
