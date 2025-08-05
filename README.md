@@ -58,8 +58,11 @@ Pipeline Flow:
 
 ### 1.  Clone Repository
 
-git clone https://github.com/your-username/netflix_dbt_project.git
-cd netflix_dbt_project
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use venv\Scripts\activate
+pip install dbt-core dbt-snowflake
+```
 
 
 ### 2.Upload CSV Files to S3
@@ -169,5 +172,16 @@ CREATE OR REPLACE TABLE raw_links (
 COPY INTO raw_links
 FROM '@netflixstage/links.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
+```
+
+### 4. dbt Setup and Execution
+
+- #### a. Install and Activate Virtual Environment
+
+```
+python -m venv venv
+source venv/bin/activate  # On Windows use venv\Scripts\activate
+pip install dbt-core dbt-snowflake
+```
 
 
