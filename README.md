@@ -20,19 +20,15 @@ It demonstrates ELT (Extract → Load → Transform) best practices with Amazon 
 
 - Interactive dashboards in Looker Studio
 
-## Dataset Description
+| File Name         | Description                    |
+|-------------------|--------------------------------|
+| movies.csv        | Movie ID, title, genres        |
+| ratings.csv       | User ratings with timestamps   |
+| tags.csv          | User-submitted tags            |
+| genome_scores.csv | Tag relevance scores           |
+| genome_tags.csv   | Tag metadata                  |
+| links.csv         | Mapping to IMDb & TMDb IDs     |
 
-We use Netflix-style open datasets in CSV format:
-
-File Name	          Description
-movies.csv	        Movie ID, title, genres
-ratings.csv	        User ratings with timestamps
-tags.csv         	  User-submitted tags
-genome_scores.csv	  Tag relevance scores
-genome_tags.csv	    Tag metadata
-links.csv          	Mapping to IMDb & TMDb IDs
-
-All files are stored in Amazon S3 under raw/ before ingestion into Snowflake.
-
+All files are stored in Amazon S3 under `raw/` before ingestion into Snowflake.
 
 
