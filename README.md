@@ -6,17 +6,17 @@ It demonstrates ELT (Extract → Load → Transform) best practices with Amazon 
 
 ### Key Features:
 
-. Cloud ingestion from Amazon S3 to Snowflake using COPY INTO
+**. **Cloud ingestion from Amazon S3 to Snowflake using COPY INTO
 
-. Role-based access control and Snowflake resource provisioning
+**.** Role-based access control and Snowflake resource provisioning
 
-. Layered dbt transformations: raw → staging → dim/fact → mart
+**.** Layered dbt transformations: raw → staging → dim/fact → mart
 
-. Over 10+ dbt tests for data quality validation
+**.** Over 10+ dbt tests for data quality validation
 
-. SCD Type 2 tracking with dbt snapshots
+**.** SCD Type 2 tracking with dbt snapshots
 
-. Incremental models for handling large datasets efficiently
+**.** Incremental models for handling large datasets efficiently
 
-. Interactive dashboards in Looker Studio
+**. **Interactive dashboards in Looker Studio
 
