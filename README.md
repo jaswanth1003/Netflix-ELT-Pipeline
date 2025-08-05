@@ -20,6 +20,8 @@ It demonstrates ELT (Extract → Load → Transform) best practices with Amazon 
 
 - Interactive dashboards in Looker Studio
 
+## Dataset Description
+
 | File Name         | Description                    |
 |-------------------|--------------------------------|
 | movies.csv        | Movie ID, title, genres        |
