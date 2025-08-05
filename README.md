@@ -49,7 +49,6 @@ Pipeline Flow:
 
 - Visualization → Looker Studio dashboards
 
-```mermaid
 flowchart TD
     A[Netflix CSVs] --> B[Amazon S3 (Raw Data)]
     B --> C[Snowflake External Stage]
@@ -60,6 +59,7 @@ flowchart TD
     G --> H[dbt Snapshots<br/>(SCD Type 2)]
     H --> I[Mart Tables]
     I --> J[Looker Studio / Power BI / Tableau]
+
 
 
 
