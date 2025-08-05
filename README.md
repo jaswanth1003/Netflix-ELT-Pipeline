@@ -183,5 +183,51 @@ python -m venv venv
 source venv/bin/activate  # On Windows use venv\Scripts\activate
 pip install dbt-core dbt-snowflake
 ```
+- #### b. Configure dbt Profile (~/.dbt/profiles.yml)
 
+``` 
+netflix_dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: <your_snowflake_account>
+      user: dbt
+      password: dbtPassword123
+      role: TRANSFORM
+      database: MOVIELENS
+      warehouse: COMPUTE_WH
+      schema: RAW
+```
 
+- #### c. Run dbt Workflow
+```
+dbt deps
+dbt seed  # if using any seed files
+dbt run   # runs all transformations including incremental models
+dbt snapshot  # captures historical changes using SCD2 logic
+dbt test  # applies dbt tests (nulls, referential integrity, etc.)
+dbt compile
+```
+## 5. Visualize with Looker Studio
+- Add Snowflake as a data source
+
+- Connect to MOVIELENS database and DEV schema
+
+- Build charts with:
+
+  - movie_analysis
+  - genre_rating_distribution
+  - user_engagement_summary
+  - tag_relevance_analysis
+  - movie_release_trends
+
+## Key Enhancements
+-  **Incremental Models**: Enabled for large tables like src_ratings
+-  **Snapshots (SCD2)**: Historical tracking of user tag changes using dbt snapshots on src_tags
+-  **Row-level testing**: Used queries to compare latest inserts and updates
+```
+SELECT * FROM MOVIELENS.DEV.FACT_RATINGS ORDER BY RATING_TIMESTAMP DESC LIMIT 5;
+SELECT * FROM MOVIELENS.DEV.SRC_RATINGS ORDER BY rating_timestamp DESC LIMIT 5;
+INSERT INTO MOVIELENS.DEV.SRC_RATINGS (user_id, movie_id, rating, rating_timestamp) VALUES (87587, 7151, '4.0', '2015-03-31 23:40:02.000 -0700');
+```
