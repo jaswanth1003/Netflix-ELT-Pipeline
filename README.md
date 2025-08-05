@@ -49,24 +49,16 @@ Pipeline Flow:
 
 - Visualization → Looker Studio dashboards
 
-Netflix CSVs
-   ↓
-Amazon S3 (Raw Data)
-   ↓
-Snowflake External Stage
-   ↓
-Raw Tables
-   ↓
-dbt Raw Models
-   ↓
-dbt Staging Models
-   ↓
-Dimensional & Fact Models
-   ↓
-dbt Snapshots (SCD Type 2)
-   ↓
-Mart Tables
-   ↓
-Looker Studio / Power BI / Tableau
+```mermaid
+flowchart TD
+    A[Netflix CSVs] --> B[Amazon S3 (Raw Data)]
+    B --> C[Snowflake External Stage]
+    C --> D[Raw Tables]
+    D --> E[dbt Raw Models]
+    E --> F[dbt Staging Models]
+    F --> G[Dimensional & Fact Models]
+    G --> H[dbt Snapshots<br/>(SCD Type 2)]
+    H --> I[Mart Tables]
+    I --> J[Looker Studio / Power BI / Tableau]
 
 
