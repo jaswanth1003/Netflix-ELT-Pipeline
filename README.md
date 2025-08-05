@@ -66,7 +66,6 @@ cd netflix_dbt_project
 Create an S3 bucket (e.g., netflixdataset-srujan).
 
 Upload all CSVs into the root folder of the bucket.
-
 ### 3. Set Up Snowflake Roles, User, Warehouse, Schema, Stage, and Raw Tables
 
 ```sql
@@ -170,33 +169,4 @@ COPY INTO raw_links
 FROM '@netflixstage/links.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
-
-### 4.  dbt Setup and Execution
-  #### - a. Install and Activate Virtual Environment
-
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install dbt-core dbt-snowflake
-#### - b. Configure dbt Profile (~/.dbt/profiles.yml)
-  
-netflix_dbt_project:
-  target: dev
-  outputs:
-    dev:
-      type: snowflake
-      account: <your_snowflake_account>
-      user: dbt
-      password: dbtPassword123
-      role: TRANSFORM
-      database: MOVIELENS
-      warehouse: COMPUTE_WH
-      schema: RAW
-#### - c. Run dbt Workflow
-
-|dbt deps        # Install dependencies
-|dbt seed        # Load any seed files
-|dbt run         # Execute all transformations
-|dbt snapshot    # Capture historical changes (SCD Type 2)
-|dbt test        # Run data tests
-|dbt compile     # Compile SQL  
 
