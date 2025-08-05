@@ -4,7 +4,7 @@
 This project showcases a real-world, end-to-end data analytics pipeline for Netflix-style datasets using the modern data stack.
 It demonstrates ELT (Extract → Load → Transform) best practices with Amazon S3, Snowflake, dbt, and Looker Studio to ingest, transform, test, and visualize large-scale datasets.
 
-Key Features:
+### Key Features:
 
 . Cloud ingestion from Amazon S3 to Snowflake using COPY INTO
 
