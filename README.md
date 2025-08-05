@@ -66,6 +66,7 @@ cd netflix_dbt_project
 Create an S3 bucket (e.g., netflixdataset-srujan).
 
 Upload all CSVs into the root folder of the bucket.
+
 ### 3. Set Up Snowflake Roles, User, Warehouse, Schema, Stage, and Raw Tables
 
 ```sql
