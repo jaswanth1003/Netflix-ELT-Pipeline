@@ -49,25 +49,34 @@ Pipeline Flow:
 
 - Visualization → Looker Studio dashboards
 
-Netflix CSVs
-   ↓
-Amazon S3 (Raw Data)
-   ↓
-Snowflake External Stage
-   ↓
-Raw Tables (via COPY INTO)
-   ↓
-dbt Raw Models
-   ↓
-dbt Staging Models
-   ↓
-Dimensional & Fact Models
-   ↓
-dbt Snapshots (SCD Type 2)
-   ↓
-Mart Tables
-   ↓
-Looker Studio / Power BI / Tableau
+flowchart LR
+    subgraph Raw_Zone[Raw Zone]
+        A[Netflix CSVs]
+        B[Amazon S3 (Raw Data)]
+        C[Snowflake External Stage]
+        D[Raw Tables (via COPY INTO)]
+    end
+
+    subgraph Staging_Zone[Staging Zone]
+        E[dbt Raw Models]
+        F[dbt Staging Models]
+    end
+
+    subgraph Transform_Zone[Transform Zone]
+        G[Dimensional & Fact Models]
+        H[dbt Snapshots (SCD Type 2)]
+    end
+
+    subgraph Mart_Zone[Mart Zone]
+        I[Mart Tables]
+    end
+
+    subgraph BI_Zone[BI & Reporting]
+        J[Looker Studio / Power BI / Tableau]
+    end
+
+    A --> B --> C --> D
+    D --> E --> F --> G --> H --> I --> J
 
 
 
