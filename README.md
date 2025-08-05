@@ -34,3 +34,39 @@ It demonstrates ELT (Extract → Load → Transform) best practices with Amazon 
 All files are stored in Amazon S3 under `raw/` before ingestion into Snowflake.
 
 
+## Architecture Diagram
+Pipeline Flow:
+
+- Extract → Raw CSVs uploaded to Amazon S3
+
+- Load → Snowflake external stage reads data from S3
+
+- Raw Tables → Loaded via COPY INTO commands
+
+- dbt Transformations → Raw → Staging → Fact/Dim → Mart
+
+- Snapshots → SCD Type 2 historical tracking
+
+- Visualization → Looker Studio dashboards
+
+Netflix CSVs
+   ↓
+Amazon S3 (Raw Data)
+   ↓
+Snowflake External Stage
+   ↓
+Raw Tables
+   ↓
+dbt Raw Models
+   ↓
+dbt Staging Models
+   ↓
+Dimensional & Fact Models
+   ↓
+dbt Snapshots (SCD Type 2)
+   ↓
+Mart Tables
+   ↓
+Looker Studio / Power BI / Tableau
+
+
